@@ -17,7 +17,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'file_id',
     ];
 
     /**
@@ -56,5 +56,10 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function getFileIdAttribute($file_id)
+    {
+        return $file_id === null ? asset('storage/static/img/profile.png') : 'keru';
     }
 }

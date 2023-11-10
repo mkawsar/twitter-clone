@@ -6,11 +6,11 @@
                 <p class="text-xl text-gray-600 text-center">Welcome back!</p>
                 <form autocomplete="off">
                     <div class="mt-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email or Username</label>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Email or Username</label>
                         <input
                             class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
-                            type="text" name="email" id="email" placeholder="Email or username" v-model="fields.email" v-validate="fieldsValidation.email"/>
-                        <span class="mt-2 text-sm text-red-600 dark:text-red-500">{{ errors.first('email') }}</span>
+                            type="text" name="username" id="username" placeholder="Email or username" v-model="fields.username" v-validate="fieldsValidation.username"/>
+                        <span class="mt-2 text-sm text-red-600 dark:text-red-500">{{ errors.first('username') }}</span>
                     </div>
                     <div class="mt-4">
                         <div class="flex justify-between">
@@ -44,9 +44,8 @@ import * as VeeValidate from 'vee-validate';
 let veeCustomMessage = {
     en: {
         custom: {
-            email: {
+            username: {
                 required: '',
-                email: '',
             },
             password: {
                 required: '',
@@ -57,7 +56,7 @@ let veeCustomMessage = {
 };
 
 let userObj = {
-    email: '',
+    username: '',
     password: ''
 };
 
@@ -72,9 +71,8 @@ export default {
         return {
             fields: userObj,
             fieldsValidation: {
-                email: {
-                    required: true,
-                    email: true
+                username: {
+                    required: true
                 },
                 password: {
                     required: true,
@@ -90,27 +88,22 @@ export default {
             this.$validator.validateAll().then((result) => {
                 if (result) {
                     let data = new FormData();
-                    data.append('email', this.user.email);
-                    data.append('password', this.user.password);
+                    data.append('username', this.fields.username);
+                    data.append('password', this.fields.password);
 
-                    axios.post(this.$env.BACKEND_API + 'employer/login', data)
+                    axios.post(this.$env.BACKEND_API + '/api/v1/auth/login', data)
                     .then(response => {
                         this.loading = false;
-                        Object.keys(response.data.response).forEach((key) => {
-                            // this.$localStorage.set(key, response.data.response[key]);
+                        Object.keys(response.data).forEach((key) => {
                             if (key === 'user') {
-                                let userRoles = [];
-                                let roles = response.data.response[key].role.name;
-                                userRoles.push(roles);
                                 let userObj = {};
-                                userObj.name = response.data.response.user.name;
-                                userObj.picture = response.data.response.user.profile_picture;
+                                userObj.name = response.data.user.name;
+                                userObj.username = response.data.user.username;
+                                userObj.profile = response.data.user.file_id;
                                 this.$localStorage.set('user', JSON.stringify(userObj));
-                                this.$localStorage.set('roles', userRoles);
                             }
-
                             if (key === 'token') {
-                                this.$localStorage.set(key, response.data.response[key]);
+                                this.$localStorage.set(key, response.data[key]);
                             }
                         });
                         this.handleRedirect();

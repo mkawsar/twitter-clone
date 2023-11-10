@@ -14,9 +14,7 @@ const baseRoutes = [
         path: '/login',
         component: Login,
         name: 'login',
-        meta: {
-            title: 'Login'
-        }
+        meta: {title: 'Login'}
     },
 ];
 

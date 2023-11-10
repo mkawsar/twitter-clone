@@ -1,3 +1,3 @@
 export default {
-    BACKEND_API: '****'
+    BACKEND_API: 'http://127.0.0.1:8000'
 }
