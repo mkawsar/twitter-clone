@@ -1,51 +1,37 @@
 <template>
-    <div class="min-h-screen bg-no-repeat bg-cover bg-center"
-         style="background-image: url(./static/images/background/login-cover.jpeg)">
-        <div class="flex justify-end">
-            <div class="bg-white min-h-screen w-1/2 flex justify-center items-center">
-                <div>
-                    <form @submit.prevent="handleSubmitLoginForm">
-                        <div>
-                            <span class="text-sm text-gray-900">Welcome back</span>
-                            <h1 class="text-2xl font-bold">Login to your account</h1>
-                        </div>
-                        <div class="my-3">
-                            <label class="block text-md mb-2" for="email">Email</label>
-                            <input class="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" type="email"
-                                   id="email"
-                                   v-model="user.email"
-                                   v-validate="userValidation.email"
-                                   name="email" placeholder="Email">
-                            <p class="text-xs italic text-red-500" v-show="errors.has('email')">{{errors.first('email')}}</p>
-                        </div>
-                        <div class="mt-5">
-                            <label class="block text-md mb-2" for="password">Password</label>
-                            <input class="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" type="password"
-                                   id="password"
-                                   v-model="user.password"
-                                   v-validate="userValidation.password"
-                                   name="password" placeholder="Password">
-                            <p class="text-xs italic text-red-500" v-show="errors.has('password')">{{errors.first('password')}}</p>
-                        </div>
+    <div class="py-16">
+        <div class="flex justify-center items-center bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
+            <div class="w-full p-8 lg:w-1/2">
+                <h2 class="text-2xl font-semibold text-gray-700 text-center">Brand</h2>
+                <p class="text-xl text-gray-600 text-center">Welcome back!</p>
+                <form autocomplete="off">
+                    <div class="mt-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email or Username</label>
+                        <input
+                            class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                            type="text" name="email" id="email" placeholder="Email or username" v-model="fields.email" v-validate="fieldsValidation.email"/>
+                        <span class="mt-2 text-sm text-red-600 dark:text-red-500">{{ errors.first('email') }}</span>
+                    </div>
+                    <div class="mt-4">
                         <div class="flex justify-between">
-                            <div>
-                                <input class="cursor-pointer" type="radio" name="rememberme">
-                                <span class="text-sm">Remember Me</span>
-                            </div>
-                            <span class="text-sm text-blue-700 hover:underline cursor-pointer">Forgot password?</span>
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
+                            <a href="javascript:void(0)" class="text-xs text-gray-500">Forget Password?</a>
                         </div>
-                        <div class="">
-                            <button
-                                :disabled="loading"
-                                class="mt-4 mb-3 w-full bg-gray-700 hover:bg-gray-600 text-white py-2 rounded-md transition duration-100"
-                                :class="loading === true ? 'cursor-not-allowed' : ''">
-                                Login now <i class="fa fa-spinner fa-spin" v-if="loading"></i>
-                            </button>
-                        </div>
-                    </form>
-                    <p class="mt-8"> Dont have an account? <span class="cursor-pointer text-sm text-blue-600"> Join free today</span>
-                    </p>
-                </div>
+                        <input
+                            class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                            type="password" id="password" placeholder="Password" name="password" v-model="fields.password" v-validate="fieldsValidation.password"/>
+                        <span class="mt-2 text-sm text-red-600 dark:text-red-500">{{ errors.first('password') }}</span>
+                    </div>
+                    <div class="mt-8">
+                        <button class="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600" @click.prevent="handleSubmitLoginForm">Login
+                        </button>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between">
+                        <span class="border-b w-1/5 md:w-1/4"></span>
+                        <a href="#" class="text-xs text-gray-500 uppercase">or sign up</a>
+                        <span class="border-b w-1/5 md:w-1/4"></span>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -84,8 +70,8 @@ export default {
     name: "Login",
     data() {
         return {
-            user: userObj,
-            userValidation: {
+            fields: userObj,
+            fieldsValidation: {
                 email: {
                     required: true,
                     email: true
@@ -137,7 +123,7 @@ export default {
             })
         },
         handleRedirect() {
-            this.$router.push('/hello/world')
+            this.$router.push('/home')
         }
     }
 }

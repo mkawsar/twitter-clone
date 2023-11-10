@@ -8,17 +8,11 @@
 
 <script>
 import Content from "./Content";
-import SidebarLayout from "./SidebarLayout";
-import TopLayout from "./TopLayout";
-import FooterLayout from "./FooterLayout";
 
 export default {
     name: "DashboardLayout",
     components: {
-        DashboardContent: Content,
-        SidebarLayout: SidebarLayout,
-        TopLayout: TopLayout,
-        FooterLayout: FooterLayout,
+        DashboardContent: Content
     }
 }
 </script>

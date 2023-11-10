@@ -1,5 +1,5 @@
 import DashboardLayout from "@/components/Views/layouts/DashboardLayout";
-import HelloWorld from "@/components/HelloWorld";
+import Home from "@/components/Home";
 
 export default [
     {
@@ -9,9 +9,9 @@ export default [
         children: [
             {
                 path: 'home',
-                name: 'HelloWorld',
-                component: HelloWorld,
-                meta: {title: 'My Plan List', requiresAuth: true}
+                name: 'Home',
+                component: Home,
+                meta: {title: 'Home', requiresAuth: true}
             }
         ]
     }

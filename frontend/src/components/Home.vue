@@ -13,8 +13,13 @@
                             <p class="text-lg font-semibold text-left hidden lg:block"> {{ tab.title }} </p>
                         </button>
                     </div>
-                    <button
+<!--                    <button
                         class="text-white bg-blue rounded-full font-semibold focus:outline-none w-12 h-12 lg:h-auto lg:w-full p-3 hover:bg-darkblue">
+                        <p class="hidden lg:block">Tweet</p>
+                        <i class="fas fa-plus lg:hidden"></i>
+                    </button>-->
+                    <button
+                        class="text-white bg-blue rounded-full font-semibold focus:outline-none w-12 h-12 lg:h-auto lg:w-full p-3 hover:bg-darkblue" style="background-color: rgb(29, 155, 240);">
                         <p class="hidden lg:block">Tweet</p>
                         <i class="fas fa-plus lg:hidden"></i>
                     </button>
@@ -44,10 +49,6 @@
                         </button>
                         <button @click="dropdown = false"
                                 class="w-full text-left hover:bg-lightest border-t border-lighter p-3 test-sm focus:outline-none">
-                            Add an existing account
-                        </button>
-                        <button @click="dropdown = false"
-                                class="w-full text-left hover:bg-lightest border-t border-lighter p-3 test-sm focus:outline-none">
                             Log out @kriss
                         </button>
                     </div>
@@ -74,9 +75,8 @@
                             <i class="text-lg text-blue mr-4 far fa-chart-bar"></i>
                             <i class="text-lg text-blue mr-4 far fa-smile"></i>
                         </div>
-                        <button type="submit"
-                                class="h-10 px-4 text-white font-semibold bg-blue hover:bg-darkblue focus:outline-none rounded-full absolute bottom-0 right-0">
-                            Tweet
+                        <button class="h-10 px-4 bg-blue-300 hover:bg-blue-700 text-white font-bold rounded-full absolute bottom-0 right-0" style="background-color: rgb(29, 155, 240);">
+                            POST
                         </button>
                     </form>
                 </div>
@@ -158,7 +158,7 @@
                 <input class="pl-12 rounded-full w-full p-2 bg-lighter text-sm mb-4" placeholder="Search Twitter"/>
                 <i class="fas fa-search absolute left-0 top-0 mt-5 ml-12 text-sm text-light"></i>
 
-                <div class="w-full rounded-lg bg-lightest">
+                <div class="w-full rounded-lg bg-lightest" style="background-color: rgb(247, 249, 249);">
                     <div class="flex items-center justify-between p-3">
                         <p class="text-lg font-bold">Trends for You</p>
                         <i class="fas fa-cog text-lg text-blue"></i>
@@ -177,7 +177,7 @@
                     </button>
                 </div>
 
-                <div class="w-full rounded-lg bg-lightest my-4">
+                <div class="w-full rounded-lg bg-lightest my-4" style="background-color: rgb(247, 249, 249);">
                     <div class=" p-3">
                         <p class="text-lg font-bold">Who to Follow</p>
                     </div>
@@ -234,6 +234,66 @@ export default {
             ],
             tweet: {text: ''},
             following: [
+                {
+                    src: 'https://randomuser.me/api/portraits/women/52.jpg',
+                    name: 'Giza Lamo',
+                    handle: '@giza',
+                    time: '1.2 hr',
+                    tweet: 'The very essence of TailWindCSS??',
+                    comments: '500',
+                    retweets: '250',
+                    like: '52,003'
+                },
+                {
+                    src: 'https://randomuser.me/api/portraits/women/62.jpg',
+                    name: 'Doug mama',
+                    handle: '@mama',
+                    time: '25 min',
+                    tweet: 'Should I use Flutter now?',
+                    comments: '1000',
+                    retweets: '500',
+                    like: '70,003'
+                },
+                {
+                    src: 'https://randomuser.me/api/portraits/men/63.jpg',
+                    name: 'Ezy Pzy',
+                    handle: '@ezypzy',
+                    time: '2.7 hr',
+                    tweet: 'Get Ready for the tech revolution',
+                    comments: '10,000',
+                    retweets: '100,002',
+                    like: '200,003'
+                },
+                {
+                    src: 'https://randomuser.me/api/portraits/women/52.jpg',
+                    name: 'Giza Lamo',
+                    handle: '@giza',
+                    time: '1.2 hr',
+                    tweet: 'The very essence of TailWindCSS??',
+                    comments: '500',
+                    retweets: '250',
+                    like: '52,003'
+                },
+                {
+                    src: 'https://randomuser.me/api/portraits/women/62.jpg',
+                    name: 'Doug mama',
+                    handle: '@mama',
+                    time: '25 min',
+                    tweet: 'Should I use Flutter now?',
+                    comments: '1000',
+                    retweets: '500',
+                    like: '70,003'
+                },
+                {
+                    src: 'https://randomuser.me/api/portraits/men/63.jpg',
+                    name: 'Ezy Pzy',
+                    handle: '@ezypzy',
+                    time: '2.7 hr',
+                    tweet: 'Get Ready for the tech revolution',
+                    comments: '10,000',
+                    retweets: '100,002',
+                    like: '200,003'
+                },
                 {
                     src: 'https://randomuser.me/api/portraits/women/52.jpg',
                     name: 'Giza Lamo',
