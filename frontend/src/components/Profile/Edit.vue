@@ -57,6 +57,8 @@
 import Vue from 'vue'
 import * as VeeValidate from 'vee-validate';
 
+import EventBus from "../../services/EventBus";
+
 let veeCustomMessage = {
     en: {
         custom: {
@@ -115,12 +117,29 @@ export default {
             this.image = e.target.files[0];
         },
         handleSubmitProfileEditForm() {
-            this.loading = true;
             this.$validator.validateAll().then((result) => {
                 if (result) {
+                    this.loading = true;
                     let form = new FormData();
                     form.append('name', this.fields.name);
                     form.append('image', this.image);
+                    form.append('_method', 'put');
+                    axios.post(`${this.$env.BACKEND_API}/api/v1/auth/profile/edit`, form)
+                        .then(res => {
+                            this.loading = false;
+                            let userObj = {};
+                            window.localStorage.removeItem('user');
+                            userObj.name = res.data.user.name;
+                            userObj.username = res.data.user.username;
+                            userObj.profile = res.data.user.image;
+                            this.$localStorage.set('user', JSON.stringify(userObj));
+                            EventBus.$emit('UPDATE_AUTH_USER_PROFILE');
+                            this.$notification.notify(this, 'Success', res.data.message);
+                        })
+                        .catch(err => {
+                            this.loading = false;
+                            this.$notification.notifyError(this, err.response.data);
+                        })
                 }
             });
         }

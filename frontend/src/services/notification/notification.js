@@ -27,15 +27,15 @@ export default {
     },
 
     notifyError($this, notifications) {
-        if (notifications.hasOwnProperty('error')) {
+        if (notifications.hasOwnProperty('errors')) {
             if (typeof notifications.error === 'string') {
                 let template = '<span><b>Oops!</b> - ' + notifications.error + '</span>';
                 this.notifyText($this, 'top', 'right', template, 'ti-info-alt', 'danger');
-            } else if (typeof notifications.error === 'object') {
+            } else if (typeof notifications.errors === 'object') {
                 let template = '<ul>';
-                for (let key in notifications.message) {
-                    if (notifications.error.hasOwnProperty(key)) {
-                        template += '<li>' + notifications.error[key][0] + '</li>';
+                for (let key in notifications.errors) {
+                    if (notifications.errors.hasOwnProperty(key)) {
+                        template += '<li>' + notifications.errors[key][0] + '</li>';
                     }
                 }
                 template += '</ul>';

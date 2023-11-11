@@ -15,6 +15,8 @@ import Content from "./Content";
 import AsideTab from './Aside.vue';
 import Trend from "./Trend.vue";
 
+import EventBus from "../../../services/EventBus";
+
 export default {
     name: "DashboardLayout",
     components: {
@@ -34,6 +36,9 @@ export default {
     },
     mounted() {
         this.handleGetUserObject();
+        EventBus.$on('UPDATE_AUTH_USER_PROFILE', () => {
+            this.handleGetUserObject();
+        });
     }
 }
 </script>
