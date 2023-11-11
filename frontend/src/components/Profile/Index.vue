@@ -17,10 +17,10 @@
                 </div>
                 <!-- Follow Button -->
                 <div class="flex flex-col text-right">
-                    <button
-                        class="flex justify-center  max-h-max whitespace-nowrap focus:outline-none  focus:ring  rounded max-w-max border bg-transparent border-blue-500 text-blue-500 hover:border-blue-800 hover:border-blue-800 flex items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto">
+                    <router-link to="/profile/edit"
+                        class="flex justify-center max-h-max whitespace-nowrap focus:outline-none focus:ring rounded-full max-w-max border bg-transparent border-blue-500 text-blue-500 hover:border-blue-800 items-center hover:shadow-lg font-bold py-2 px-4 mr-0 ml-auto">
                         Edit Profile
-                    </button>
+                    </router-link>
                 </div>
             </div>
 

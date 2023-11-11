@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\APIs;
 
+use App\Http\Requests\Profile\EditUserProfileFormRequest;
 use App\Models\Following;
 use App\Models\Tweet;
+use App\Traits\FileUploadTrait;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -11,6 +14,7 @@ use App\Http\Controllers\Controller;
 
 class UserProfileController extends Controller
 {
+    use FileUploadTrait;
     public function info(Request $request): JsonResponse
     {
         $userID = $request->user()->id;
@@ -34,5 +38,36 @@ class UserProfileController extends Controller
             'tweets' => $tweets,
             'status' => true
         ], 200);
+    }
+
+    public function edit(EditUserProfileFormRequest $request)
+    {
+        $user = User::query()->find($request->user()->id);
+
+        if (empty($user)) {
+            return response()->json([
+                'message' => 'User not found',
+                'status' => false
+            ], 404);
+        }
+        $fileID = $this->upload($request->file('image'), $request->user()->id);
+
+        $payload = [
+            'name' => $request->name,
+            'file_id' => $fileID
+        ];
+
+        if ($user->update($payload)) {
+            return response()->json([
+                'message' => 'Your profile has been updated successfully',
+                'user' => $request->user(),
+                'status' => true
+            ], 201);
+        } else {
+            return response()->json([
+                'message' => 'Your profile has not been updated successfully',
+                'status' => false
+            ], 412);
+        }
     }
 }
