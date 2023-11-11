@@ -26,19 +26,17 @@
             <div class=" p-3">
                 <p class="text-lg font-bold">Who to Follow</p>
             </div>
-            <button v-for="(user,index) in follow" :key="index"
+            <button v-for="(user, index) in follow" :key="index"
                     class="w-full flex hover:bg-lighter p-3 border-t border-lighter">
-                <img :src="`${ user.src }`" class="w-12 h-12 rounded-full border border-lighter"/>
+                <img :src="`${ user.profile }`" class="w-12 h-12 rounded-full border border-lighter"/>
                 <div class="hidden lg:block ml-4">
-                    <p class="text-sm font-bold leading-tight"> {{ user.name }} </p>
-                    <p class="text-sm leading-tight"> {{ user.handle }} </p>
+                    <p class="text-sm font-bold">{{ user.name }}</p>
+                    <p class="text-sm">@{{ user.username }}</p>
                 </div>
-                <button class="ml-auto text-sm text-blue py-1 px-4 rounded-full border-2 border-blue">
+                <button class="ml-auto text-sm text-blue py-1 px-4 rounded-full border-2 border-blue"
+                        @click.prevent="handlePostFollowing(index)">
                     Follow
                 </button>
-            </button>
-            <button class="p-3 w-full hover:bg-lighter text-left text-blue border-t border-lighter">
-                Show More
             </button>
         </div>
     </div>
@@ -54,12 +52,43 @@ export default {
                 {top: 'Animals', title: 'Shark larger than Great white', bottom: '115k tweets'},
                 {top: 'The techies nation', title: '2m servers', bottom: '30k tweets'},
             ],
-            follow: [
-                {src: 'https://randomuser.me/api/portraits/men/79.jpg', name: 'Kriss Kovan', handle: '@kriss'},
-                {src: 'https://randomuser.me/api/portraits/men/70.jpg', name: 'Danny D', handle: '@theD'},
-                {src: 'https://randomuser.me/api/portraits/men/27.jpg', name: 'Hubert Aly', handle: '@alyway'}
-            ],
+            follow: [],
         }
+    },
+    methods: {
+        handleGetAllPeople() {
+            axios.get(`${this.$env.BACKEND_API}/api/v1/people/following/all/list`)
+                .then(res => {
+                    let response = res.data;
+                    response.forEach(item => {
+                        let obj = {};
+                        obj.id = item.id;
+                        obj.name = item.name;
+                        obj.username = item.username;
+                        obj.profile = item.file_id;
+                        this.follow.push(obj);
+                    })
+                })
+                .catch(err => {
+                    console.log(err.response);
+                })
+        },
+        handlePostFollowing(key) {
+            axios.post(`${this.$env.BACKEND_API}/api/v1/people/following/${this.follow[key].id}/store`)
+                .then(res => {
+                    if (res.status === 201) {
+                        this.follow = [];
+                        this.handleGetAllPeople();
+                        this.$notification.notify(this, 'Success', res.data.message);
+                    }
+                })
+                .catch(err => {
+                    this.$notification.error(this, 'Error', 'Something went wrong');
+                })
+        }
+    },
+    mounted() {
+        this.handleGetAllPeople();
     }
 }
 </script>
