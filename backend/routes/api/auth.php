@@ -12,6 +12,7 @@ Route::get('/status', function () {
 
 Route::name('auth.')->prefix('auth')->middleware('api')->group(function () {
     Route::post('login', [AuthController::class, 'login'])->name('login');
+    Route::post('registration', [AuthController::class, 'registration'])->name('registration');
     Route::middleware('jwt.verify')->group(function () {
         Route::get('me', [AuthController::class, 'me'])->name('me');
         Route::get('refresh/token', [AuthController::class, 'refresh'])->name('refresh.token');

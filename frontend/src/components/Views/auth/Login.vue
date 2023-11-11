@@ -15,7 +15,6 @@
                     <div class="mt-4">
                         <div class="flex justify-between">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
-                            <a href="javascript:void(0)" class="text-xs text-gray-500">Forget Password?</a>
                         </div>
                         <input
                             class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
@@ -28,7 +27,7 @@
                     </div>
                     <div class="mt-4 flex items-center justify-between">
                         <span class="border-b w-1/5 md:w-1/4"></span>
-                        <a href="#" class="text-xs text-gray-500 uppercase">or sign up</a>
+                        <router-link to="/register" class="text-xs text-gray-500 uppercase">or sign up</router-link>
                         <span class="border-b w-1/5 md:w-1/4"></span>
                     </div>
                 </form>
@@ -116,6 +115,8 @@ export default {
             })
         },
         handleRedirect() {
+            this.fields.username = '';
+            this.fields.password = '';
             this.$router.push('/home')
         }
     }

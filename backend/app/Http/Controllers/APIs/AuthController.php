@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\APIs;
 
 use App\Http\Requests\Authentication\LoginFormRequest;
+use App\Http\Requests\Authentication\RegistrationFormRequest;
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -110,4 +112,23 @@ class AuthController extends Controller
             ->get();
     }
 
+    public function registration(RegistrationFormRequest $request): JsonResponse
+    {
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->username = $request->username;
+        $user->password = bcrypt($request->password);
+        if ($user->save()) {
+            return response()->json([
+                'message' => 'Your registration has been created successfully',
+                'status' => true
+            ], 201);
+        } else {
+            return response()->json([
+                'message' => 'Your registration has not been created successfully',
+                'status' => false
+            ], 412);
+        }
+    }
 }

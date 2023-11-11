@@ -19,7 +19,7 @@ class CreateFollowingsTable extends Migration
             $table->unsignedInteger('follower_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('following_id')->references('id')->on('tweets')->onDelete('cascade');
+            $table->foreign('following_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('follower_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

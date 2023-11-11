@@ -23,7 +23,7 @@ class PeopleFollowingController extends Controller
         return $peoples;
     }
 
-    public function storeFollowing(Request $request, $userID): JsonResponse
+    public function storeFollowing(Request $request, $userID)
     {
         $user = User::query()->find($userID);
 
