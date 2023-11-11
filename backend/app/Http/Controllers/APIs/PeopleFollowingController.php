@@ -49,4 +49,39 @@ class PeopleFollowingController extends Controller
             ], 412);
         }
     }
+
+    public function getFollowingList(Request $request)
+    {
+        $people = Following::query()
+            ->with('following:id,name,username,file_id')
+            ->where('follower_id', '=', $request->user()->id)
+            ->inRandomOrder()
+            ->limit(5)
+            ->get();
+        return $people;
+    }
+
+    public function updateUnFollowing(Request $request, $followingID): JsonResponse
+    {
+        $following = Following::query()->find($followingID);
+
+        if (empty($following)) {
+            return response()->json([
+                'message' => 'Data not found',
+                'status' => false
+            ], 404);
+        }
+
+        if ($following->delete()) {
+            return response()->json([
+                'message' => 'Your unfollow has been stored successfully',
+                'status' => true
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Your unfollow has not been stored successfully',
+                'status' => false
+            ], 412);
+        }
+    }
 }
