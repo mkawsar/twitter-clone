@@ -9,7 +9,7 @@
                         <div style="height:9rem; width:9rem;" class="md rounded-full relative avatar">
                             <img style="height:9rem; width:9rem;"
                                  class="md rounded-full relative border-4 border-gray-900"
-                                 :src="user.file_id"
+                                 :src="user.image"
                                  alt="">
                             <div class="absolute"></div>
                         </div>
@@ -62,7 +62,7 @@
                         <a href="#" class="flex-shrink-0 group block">
                             <div class="flex items-center">
                                 <div>
-                                    <img class="inline-block h-10 w-10 rounded-full" :src="item.creator.file_id" alt="">
+                                    <img class="inline-block h-10 w-10 rounded-full" :src="item.creator.image" alt="">
                                 </div>
                                 <div class="ml-3">
                                     <p class="text-base leading-6 font-medium">

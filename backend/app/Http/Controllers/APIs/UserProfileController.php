@@ -22,7 +22,7 @@ class UserProfileController extends Controller
         $user->banner = asset('storage/static/img/login-cover.jpeg');
         $user->joined = $user->created_at->format('F, Y');
         $tweets = Tweet::query()
-            ->with('creator:id,name,username,file_id')
+            ->with('creator:id,name,username,image')
             ->where('created_by', '=', $userID)
             ->orderBy('created_at', 'DESC')
             ->get();
@@ -50,17 +50,17 @@ class UserProfileController extends Controller
                 'status' => false
             ], 404);
         }
-        $fileID = $this->upload($request->file('image'), $request->user()->id);
+        $fileName = $this->upload($request->file('image'), $request->user()->id);
 
         $payload = [
             'name' => $request->name,
-            'file_id' => $fileID
+            'image' => $fileName
         ];
 
         if ($user->update($payload)) {
             return response()->json([
                 'message' => 'Your profile has been updated successfully',
-                'user' => $request->user(),
+                'user' => User::query()->find($request->user()->id),
                 'status' => true
             ], 201);
         } else {

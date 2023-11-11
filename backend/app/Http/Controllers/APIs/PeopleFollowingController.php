@@ -53,7 +53,7 @@ class PeopleFollowingController extends Controller
     public function getFollowingList(Request $request)
     {
         $people = Following::query()
-            ->with('following:id,name,username,file_id')
+            ->with('following:id,name,username,image')
             ->where('follower_id', '=', $request->user()->id)
             ->inRandomOrder()
             ->limit(5)

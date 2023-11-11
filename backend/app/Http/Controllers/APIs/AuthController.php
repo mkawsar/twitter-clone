@@ -14,7 +14,6 @@ class AuthController extends Controller
     {
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-
         // Find user in database
         $user = User::query()
             ->where('email', strtolower($request->username))
@@ -70,6 +69,7 @@ class AuthController extends Controller
 
     public function me(Request $request)
     {
+        $user = User::query()->find($request->user()->id);
         return response()->json([
             'data' => $request->user(),
             'status' => true

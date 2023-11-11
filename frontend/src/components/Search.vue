@@ -2,7 +2,7 @@
     <div class="w-full rounded-lg bg-lightest my-4">
         <button v-for="(user, index) in users" :key="index"
                 class="w-full flex hover:bg-lighter p-3 border-t border-lighter">
-            <img :src="`${ user.file_id }`" class="w-12 h-12 rounded-full border border-lighter"/>
+            <img :src="`${ user.image }`" class="w-12 h-12 rounded-full border border-lighter"/>
             <div class="hidden lg:block ml-4">
                 <p class="text-sm font-bold">{{ user.name }}</p>
             </div>

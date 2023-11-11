@@ -69,7 +69,7 @@ export default {
                         obj.id = item.id;
                         obj.name = item.name;
                         obj.username = item.username;
-                        obj.profile = item.file_id;
+                        obj.profile = item.image;
                         this.follow.push(obj);
                     })
                 })
@@ -102,7 +102,7 @@ export default {
                         obj.id = item.following.id;
                         obj.name = item.following.name;
                         obj.username = item.following.username;
-                        obj.profile = item.following.file_id;
+                        obj.profile = item.following.image;
                         this.following.push(obj);
 
                     })

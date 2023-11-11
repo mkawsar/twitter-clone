@@ -31,17 +31,17 @@
                  class="absolute bottom-0 left-0 w-64 rounded-lg shadow-md border-lightest bg-white mb-16">
                 <button @click="dropdown = false"
                         class="p-3 flex items-center w-full hover:bg-lightest p-2 focus:outline-none">
-                    <img src="https://randomuser.me/api/portraits/men/11.jpg"
+                    <img :src="user.profile"
                          class="w-10 h-10 rounded-full border border-lighter"/>
                     <div class="ml-4">
-                        <p class="text-sm font-bold leading-tight"> Kriss Kawa </p>
-                        <p class="text-sm leading-tight"> @kriss </p>
+                        <p class="text-sm font-bold leading-tight"> {{user.name}} </p>
+                        <p class="text-sm leading-tight"> @{{user.username}} </p>
                     </div>
                     <i class="fas fa-check ml-auto test-blue"></i>
                 </button>
                 <button @click.prevent="handleLogout"
                         class="w-full text-left hover:bg-lightest border-t border-lighter p-3 test-sm focus:outline-none">
-                    Log out @kriss
+                    Log out @{{user.username}}
                 </button>
             </div>
         </div>

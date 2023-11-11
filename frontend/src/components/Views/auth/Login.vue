@@ -99,7 +99,7 @@ export default {
                                 let userObj = {};
                                 userObj.name = response.data.user.name;
                                 userObj.username = response.data.user.username;
-                                userObj.profile = response.data.user.file_id;
+                                userObj.profile = response.data.user.image;
                                 this.$localStorage.set('user', JSON.stringify(userObj));
                             }
                             if (key === 'token') {

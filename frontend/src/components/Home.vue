@@ -112,7 +112,7 @@ export default {
                             obj.time = response.ago;
                             obj.name = response.creator.name;
                             obj.username = response.creator.username;
-                            obj.profile = response.creator.file_id;
+                            obj.profile = response.creator.image;
                             this.tweets.splice(0, 0, obj);
                             this.loading = false;
                             this.fields.tweet = '';
@@ -142,7 +142,7 @@ export default {
                         obj.time = item.ago;
                         obj.name = item.creator.name;
                         obj.username = item.creator.username;
-                        obj.profile = item.creator.file_id;
+                        obj.profile = item.creator.image;
                         this.tweets.push(obj)
                     })
                 })
