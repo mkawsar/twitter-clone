@@ -13,7 +13,7 @@ class TweetController extends Controller
 {
     public function list(Request $request)
     {
-        $tweets = Tweet::query()->orderBy('created_at', 'DESC')->simplePaginate(10);
+        $tweets = Tweet::query()->with('creator:id,name,username,file_id')->orderBy('created_at', 'DESC')->simplePaginate(10);
         foreach ($tweets as $key => $item) {
             $check = TweetLike::query()->where('tweet_id', '=', $item->id)->where('liked_by', '=', $request->user()->id)->count();
             $item->ago = getTimeAgo($item->created_at);
@@ -31,8 +31,12 @@ class TweetController extends Controller
         $tweet->updated_by = $request->user()->id;
 
         if ($tweet->save()) {
+            $item = Tweet::query()->with('creator:id,name,username,file_id')->find($tweet->id);
+            $item->ago = getTimeAgo($item->created_at);
+            $item->liked = false;
             return response()->json([
                 'message' => 'Your tweet has been created successfully',
+                'data' => $item,
                 'status' => true
             ], 201);
         } else {
