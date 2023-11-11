@@ -5,10 +5,10 @@
                 <i class="fab fa-twitter"></i>
             </button>
             <div>
-                <button v-for="(tab,index) in tabs" :key="index" @click="id = tab.id" :class="`focus:outline-none hover:text-blue flex items-center py-2 px-4 hover:bg-lightblue rounded-full mr-auto mb-3 ${ id === tab.id ? 'text-blue' : ''}`">
+                <router-link v-for="(tab,index) in tabs" :to="tab.path" :class="`focus:outline-none hover:text-blue flex items-center py-2 px-4 hover:bg-lightblue rounded-full mr-auto mb-3 ${ id === tab.id ? 'text-blue' : ''}`">
                     <i :class="`${ tab.icon } text-2xl mr-4 text-left`"></i>
                     <p class="text-lg font-semibold text-left hidden lg:block"> {{ tab.title }} </p>
-                </button>
+                </router-link>
             </div>
             <button
                 class="text-white bg-blue rounded-full font-semibold focus:outline-none w-12 h-12 lg:h-auto lg:w-full p-3 hover:bg-darkblue" style="background-color: rgb(29, 155, 240);">
@@ -54,14 +54,14 @@ export default {
     data() {
         return {
             tabs: [
-                {icon: 'fas fa-home', title: 'Home', id: 'home'},
-                {icon: 'fas fa-hashtag', title: 'Explore', id: 'explore'},
-                {icon: 'far fa-bell', title: 'Notifications', id: 'notifications'},
-                {icon: 'far fa-envelope', title: 'Messages', id: 'messages'},
-                {icon: 'far fa-bookmark', title: 'Bookmarks', id: 'bookmarks'},
-                {icon: 'fas fa-clipboard-list', title: 'Lists', id: 'lists'},
-                {icon: 'far fa-user', title: 'Profile', id: 'profile'},
-                {icon: 'fas fa-ellipsis-h', title: 'More', id: 'more'}
+                {icon: 'fas fa-home', title: 'Home', id: 'home', path: '/home'},
+                {icon: 'fas fa-hashtag', title: 'Explore', id: 'explore', path: ''},
+                {icon: 'far fa-bell', title: 'Notifications', id: 'notifications', path: ''},
+                {icon: 'far fa-envelope', title: 'Messages', id: 'messages', path: ''},
+                {icon: 'far fa-bookmark', title: 'Bookmarks', id: 'bookmarks', path: ''},
+                {icon: 'fas fa-clipboard-list', title: 'Lists', id: 'lists', path: ''},
+                {icon: 'far fa-user', title: 'Profile', id: 'profile', path: '/profile/view'},
+                {icon: 'fas fa-ellipsis-h', title: 'More', id: 'more', path: ''}
             ],
             dropdown: false,
             user: {}

@@ -132,7 +132,7 @@ export default {
         handleGetAllTweet() {
             axios.get(`${this.$env.BACKEND_API}/api/v1/tweet/list`)
                 .then(res => {
-                    let response = res.data.data;
+                    let response = res.data;
                     response.forEach(item => {
                         let obj = {};
                         obj.tweet = item.tweet;

@@ -13,7 +13,7 @@ class TweetController extends Controller
 {
     public function list(Request $request)
     {
-        $tweets = Tweet::query()->with('creator:id,name,username,file_id')->orderBy('created_at', 'DESC')->simplePaginate(10);
+        $tweets = Tweet::query()->with('creator:id,name,username,file_id')->orderBy('created_at', 'DESC')->get();
         foreach ($tweets as $key => $item) {
             $check = TweetLike::query()->where('tweet_id', '=', $item->id)->where('liked_by', '=', $request->user()->id)->count();
             $item->ago = getTimeAgo($item->created_at);

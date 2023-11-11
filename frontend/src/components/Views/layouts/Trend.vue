@@ -1,7 +1,10 @@
 <template>
     <div class="md:block hidden w-1/3 h-full border-l border-lighter py-2 px-6 overflow-y-scroll relative">
-        <input class="pl-12 rounded-full w-full p-2 bg-lighter text-sm mb-4" placeholder="Search Twitter"/>
-        <i class="fas fa-search absolute left-0 top-0 mt-5 ml-12 text-sm text-light"></i>
+        <form @submit.prevent="handleSubmitSearch">
+            <input class="pl-12 rounded-full w-full p-2 bg-lighter text-sm mb-4" placeholder="Search Twitter"
+                   v-model="query"/>
+            <i class="fas fa-search absolute left-0 top-0 mt-5 ml-12 text-sm text-light"></i>
+        </form>
 
         <div class="w-full rounded-lg bg-lightest my-4" style="background-color: rgb(247, 249, 249);">
             <div class=" p-3">
@@ -52,7 +55,8 @@ export default {
                 {top: 'The techies nation', title: '2m servers', bottom: '30k tweets'},
             ],
             follow: [],
-            following: []
+            following: [],
+            query: ''
         }
     },
     methods: {
@@ -122,11 +126,17 @@ export default {
                     this.$notification.error(this, 'Error', 'Something went wrong');
                 })
 
+        },
+        handleSubmitSearch() {
+            if (this.query !== '') {
+                this.$router.push('/search?query=' + this.query);
+            }
         }
     },
     mounted() {
         this.handleGetAllPeople();
         this.handleGetFollowingPeopleList();
+        this.query = this.$route.query.query;
     }
 }
 </script>

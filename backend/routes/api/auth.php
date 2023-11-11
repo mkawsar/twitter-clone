@@ -16,5 +16,6 @@ Route::name('auth.')->prefix('auth')->middleware('api')->group(function () {
         Route::get('me', [AuthController::class, 'me'])->name('me');
         Route::get('refresh/token', [AuthController::class, 'refresh'])->name('refresh.token');
         Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+        Route::post('search', [AuthController::class, 'search'])->name('search');
     });
 });

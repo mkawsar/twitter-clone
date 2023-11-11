@@ -98,4 +98,16 @@ class AuthController extends Controller
         return $this->respondWithToken($this->guard()->refresh(), $request->user());
     }
 
+    public function search(Request $request)
+    {
+        $query = '';
+        if (!empty($request->search)) {
+            $query = $request->search;
+        }
+
+        return User::query()->where('email', 'LIKE', '%' . $query . '%')
+            ->orWhere('username', 'LIKE', '%' . $query . '%')
+            ->get();
+    }
+
 }
