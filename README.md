@@ -45,7 +45,7 @@ It's twitter clone project
 * Finally run the frontend server `npm run build`/`npm run dev`
 
 ### Note
-* I have attached postman collection in root directory
+* I have attached `postman collection` and `screenshot` in root directory
 
 ### Support
 
